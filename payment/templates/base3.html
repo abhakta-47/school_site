@@ -1,0 +1,110 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}Base Template{% endblock %}</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="{% static "/styles/base.css" %}">
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+      integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+      integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+      crossorigin="anonymous"
+    ></script>
+    {% block styles %}{% endblock %}
+  </head>
+  <body>
+    {% block header %}
+    <!-- bootstrap navbar -->
+    <!-- Image and text -->
+    <nav class="navbar navbar-light bg-light">
+      <a class="navbar-brand" href="#">
+        <img src="{% static "/images/logo.svg" %}" width="30" height="30"
+        class="d-inline-block align-top" alt=""> RamaKrishna Siksha Mandir
+      </a>
+    </nav>
+    {% endblock %}
+    <div class="bg-cover"></div>
+    <div class="container1">
+      <!-- <div class="my-progress-bar"> -->
+      <div class="vertical my-progress-bar">
+        <svg
+          width="30"
+          height="792"
+          viewBox="0 0 30 792"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <g id="payment-complete" class="complete">
+            <path d="M15 586V764.5" stroke-width="6" />
+            <circle cx="15" cy="777" r="15" />
+          </g>
+          <g id="payment-processing" class="complete">
+            <path d="M15 394V572.5" stroke-width="6" />
+            <circle cx="15" cy="585" r="15" />
+          </g>
+          <g id="select-months" class="complete">
+            <path d="M15 203V381.5" stroke-width="6" />
+            <circle cx="15" cy="394" r="15" />
+          </g>
+          <g id="select-student" class="complete">
+            <path d="M15 13V191.5" stroke-width="6" />
+            <circle cx="15" cy="204" r="15" " />
+          </g>
+          <circle cx="15" cy="15" r="15" id="start" class="complete" />
+        </svg>
+      </div>
+      <div class="horizontal my-progress-bar">
+        <svg
+          width="792"
+          height="30"
+          viewBox="0 0 792 30"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <g id="payment-complete" class="complete">
+            <circle cx="777" cy="15" r="15" transform="rotate(-90 777 15)" />
+            <path d="M586 15L764.5 15" stroke-width="6" />
+          </g>
+
+          <g id="payment-procesing" class="complete">
+            <circle cx="585" cy="15" r="15" transform="rotate(-90 585 15)" />
+            <path d="M394 15L572.5 15" stroke-width="6" />
+          </g>
+
+          <g id="select-months" class="complete">
+            <circle cx="394" cy="15" r="15" transform="rotate(-90 394 15)" />
+            <path d="M203 15L381.5 15" stroke-width="6" />
+          </g>
+
+          <g id="select-student" class="complete">
+            <circle cx="204" cy="15" r="15" transform="rotate(-90 204 15)" />
+            <path d="M13 15L191.5 15" stroke-width="6" />
+          </g>
+          <circle cx="15" cy="15" r="15" transform="rotate(-90 15 15)" />
+        </svg>
+      </div>
+      <!-- </div> -->
+      <div id="content">
+        {% block content %} {% endblock %}
+      </div>
+    </div>
+  </body>
+</html>

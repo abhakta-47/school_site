@@ -1,0 +1,110 @@
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+}
+
+.bg-cover {
+  position: absolute;
+  top: 0;
+  height: 100vh;
+  width: 100vw;
+  background-position: center;
+  background-size: cover;
+  z-index: -10;
+}
+
+.bg-light {
+  background-color: transparent !important;
+}
+
+.container1 {
+  width: 100%;
+  height: calc(100% - 56px);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+}
+
+.container1 .horizontal {
+  display: none !important;
+}
+
+.container1 .my-progress-bar {
+  margin: 0 1rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.container1 .my-progress-bar svg {
+  height: 80%;
+}
+
+.container1 .my-progress-bar svg .complete {
+  fill: #DD4C19;
+  stroke: #DD4C19;
+}
+
+.container1 .my-progress-bar svg .incomplete {
+  fill: #fb9755;
+  stroke: #fb9755;
+}
+
+.container1 #content {
+  padding: 5rem 2rem;
+}
+
+@media only screen and (max-width: 600px) {
+  .container1 {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+  }
+
+  .my-progress-bar {
+    margin: 0 1rem;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    /* height: 100%; */
+  }
+
+  .my-progress-bar .veritcal {
+    display: none !important;
+  }
+
+  .my-progress-bar svg {
+    width: 80%;
+  }
+
+  .my-progress-bar svg .complete {
+    fill: #DD4C19;
+    stroke: #DD4C19;
+  }
+
+  .my-progress-bar svg .incomplete {
+    fill: #fb9755;
+    stroke: #fb9755;
+  }
+}
+
+/* # sourceMappingURL=base.css.map */

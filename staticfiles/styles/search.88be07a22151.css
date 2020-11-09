@@ -1,0 +1,62 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.my-card {
+    padding: .8rem 2rem;
+    border-radius: 8px;
+    box-shadow: 5px 5px 10px grey;
+    margin-bottom: 1.5rem;
+    width: 90%;
+    max-width: 700px;
+}
+
+.form-inline {
+    justify-content: space-evenly;
+    display: flex;
+    align-items: center;
+}
+
+
+
+tr:nth-child(odd) {
+    background-color: gainsboro;
+    color: black;
+}
+
+tr:nth-child(even) {
+    color: black;
+}
+
+tr:nth-child(1) {
+    background-color: aqua;
+    color: black;
+    padding: 8px 10px;
+}
+
+td {
+    text-align: center;
+    padding: 10px 20px;
+}
+
+#content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+#search-result-table {
+    display: flex;
+    align-items: center;
+    overflow-x: auto;
+}
+
+.box {
+    height: 100px;
+    width: 100px;
+    background-color: grey;
+    border: grey;
+}

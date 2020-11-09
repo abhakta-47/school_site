@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block header %}
+<link rel="stylesheet" href="{% static "/styles/search.css" %}" />
+{% endblock %}
+
+{% block content %}
+
+<!-- <form action="/dues/" method="post"> -->
+
+<div class="my-card" style="align-items: center;">
+  <nav >
+    <form class="form-inline">
+      <label id="for-search-term" for="search_term">Enter name: </label>
+      <input class="form-control mr-sm-2" id="search_term" type="search" placeholder="first or last name" aria-label="Search">
+      <button id="submit_button" class="select-button btn btn-primary" type="submit">Search</button>
+    </form>
+  </nav>
+</div>
+
+<div class="my-card" style="background-color: #fafafa;" id="search-result-table">
+  <table id="table" class="table"></table>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="dob-verification" tabindex="-1" role="dialog" aria-labelledby="dob-verificationTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="dob-verificationTitle">Final Form</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <!-- modal-body -->
+      <div class="modal-body">
+        <nav>
+          <form class="form-inline" action="dues/" method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="id">
+            <label for="dob">Enter Date of birth</label>
+            <input class="form-control" id="dob" name="date" type="date"/>
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Submit</button>
+          </form>
+        </nav>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+{%block endscript%}
+<script src="{% static "/scripts/search.js" %}"></script>
+{%endblock%}

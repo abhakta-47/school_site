@@ -1,0 +1,12 @@
+#notice-table th:nth-child(1),
+td:nth-child(1) {
+    width: 200px !important;
+}
+
+@media only screen and (max-width: 600px) {
+
+    #notice-table th:nth-child(1),
+    td:nth-child(1) {
+        width: 100px !important;
+    }
+}

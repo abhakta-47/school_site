@@ -1,0 +1,71 @@
+
+{% extends "base.html" %} 
+{% load static %}
+{% block title %} Notices{% endblock %}
+
+{%block header%} 
+  <link rel="stylesheet" href="{%static 'css/notices.css'%}">
+  <link rel="stylesheet" href="//cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css"> 
+  <style>
+    @media only screen and (max-width: 600px) {
+      #notice-table > thead :nth-child(3),tbody :nth-child(3){
+        display:none !important;
+      }
+    }
+  </style>
+{%endblock%}
+
+{% block content %}
+<div class="container text-center">
+  <h1>Notices</h1>
+</div>
+
+<div class="container">
+  <table class="table table-bordered" id="notice-table">
+    <thead class="thead-dark">
+      <tr>
+        <th>Date</th>
+        <th>Notice</th>
+        <th style="width: 5rem;">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for notice in notices %}
+        <tr>
+          <td>{{ notice.date }}</td>
+          <td> <a href="{{ notice.file.url }}">{{ notice.description }}</a> </td>
+          <td> <a href="{{ notice.file.url }}"><i class="fas fa-download"></i></a> </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+  {% if notices.has_other_pages %}
+    <ul class="pagination">
+      {% if notices.has_previous %}
+        <li><a href="?page={{ notices.previous_page_number }}">&laquo;</a></li>
+      {% else %}
+        <li class="disabled"><span>&laquo;</span></li>
+      {% endif %}
+      {% for i in notices.paginator.page_range %}
+        {% if notices.number == i %}
+          <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+        {% else %}
+          <li><a href="?page={{ i }}">{{ i }}</a></li>
+        {% endif %}
+      {% endfor %}
+      {% if notices.has_next %}
+        <li><a href="?page={{ notices.next_page_number }}">&raquo;</a></li>
+      {% else %}
+        <li class="disabled"><span>&raquo;</span></li>
+      {% endif %}
+    </ul>
+  {% endif %}
+{% endblock %}
+
+{%block endscript %}
+<script src="//cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+<script>
+  $("#notice-table").DataTable();
+</script>
+{%endblock%}

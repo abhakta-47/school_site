@@ -1,0 +1,27 @@
+.active-pill {
+    color: white !important;
+    background-color: orange;
+    border-radius: 5px;
+}
+
+.para {
+    display: flex;
+    align-items: center;
+}
+
+.para img {
+    height: 50vh;
+}
+
+.para p {
+    margin: 50px;
+}
+
+.page-footer {
+    background-color: orange;
+    color: white;
+}
+
+#content {
+    padding: 2vh 2vw;
+}
