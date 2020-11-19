@@ -13,7 +13,8 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 from pathlib import Path
 import os
 
-# import django_heroku
+import django_heroku
+
 # import dj_database_url
 
 
@@ -217,17 +218,17 @@ WSGI_APPLICATION = "school_site.wsgi.application"
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 DATABASES = {
-    "default": {"ENGINE": "django.db.backends.sqlite3", "NAME": BASE_DIR / "db.sqlite3"}
+    # "default": {"ENGINE": "django.db.backends.sqlite3", "NAME": BASE_DIR / "db.sqlite3"}
     # # "default": dj_database_url.config(conn_max_age=600, ssl_require=True)
-    # "default": {
-    #     "ENGINE": "django.db.backends.postgresql",
-    #     "NAME": "d5118pmh879qd8",
-    #     "USER": "vkhgskckgibpsm",
-    #     "PASSWORD": "b9a5f03f184227f6a0d0eff7e06036ed015b8937b80047ad9457a4d98fcebd68",
-    #     "HOST": "ec2-54-166-114-48.compute-1.amazonaws.com",
-    #     "PORT": "5432",
-    #     "CONN_MAX_AGE": 500,
-    # }
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "d5118pmh879qd8",
+        "USER": "vkhgskckgibpsm",
+        "PASSWORD": "b9a5f03f184227f6a0d0eff7e06036ed015b8937b80047ad9457a4d98fcebd68",
+        "HOST": "ec2-54-166-114-48.compute-1.amazonaws.com",
+        "PORT": "5432",
+        "CONN_MAX_AGE": 500,
+    }
 }
 
 # db_from_env = dj_database_url.config(conn_max_age=600)
@@ -274,4 +275,4 @@ MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 # Activate Django-Heroku.
-# django_heroku.settings(locals())
+django_heroku.settings(locals())
