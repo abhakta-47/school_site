@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Education &mdash; Free Website Template, Free HTML5 Template by freehtml5.co</title>
+    <title>School Site Project Django</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Free HTML5 Website Template by freehtml5.co" />
     <meta name="keywords" content="free website templates, free html5, free template, free bootstrap, free website template, html5, css3, mobile first, responsive" />
@@ -14,13 +14,9 @@
     <!-- 
     //////////////////////////////////////////////////////
   
-    FREE HTML5 TEMPLATE 
-    DESIGNED & DEVELOPED by FreeHTML5.co
-      
-    Website: 		http://freehtml5.co/
-    Email: 			info@freehtml5.co
-    Twitter: 		http://twitter.com/fh5co
-    Facebook: 		https://www.facebook.com/fh5co
+	School Site Project
+	By : Arnab
+	Framework : Django 
   
     //////////////////////////////////////////////////////
      -->
@@ -49,9 +45,10 @@
 	<link rel="stylesheet" href="{% static 'css/icomoon.css' %}">
 	<script src="https://kit.fontawesome.com/fecc50ad8e.js" crossorigin="anonymous"></script>
 
-    <!-- Bootstrap  -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+	<!-- Bootstrap  -->
 	<link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+	
 
     <!-- Magnific Popup -->
     <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
@@ -110,7 +107,7 @@
 						<ul>
 							<li {%if request.path == '/' %}  class="active" {%endif%}><a href="/">Home</a></li>
 							<li {%if '/admission' in request.path  %}  class="active" {%endif%}><a href="/admission">Admission</a></li>
-							<li {%if '/feepay' in request.path %}  class="active" {%endif%}><a href="/feepay">Payment</a></li>
+							<li {%if '/pay' in request.path %}  class="active" {%endif%}><a href="/pay">Payment</a></li>
 							<li {%if '/notices' in request.path  %}  class="active" {%endif%}><a href="/notices">Notices</a></li>
 							<!-- <li><a href="courses.html">Courses</a></li>
 							<li><a href="teacher.html">Teacher</a></li>
@@ -207,8 +204,8 @@
 	<div class="gototop js-top">
 		<a href="#" class="js-gotop"><i class="icon-arrow-up"></i></a>
   </div>
-  
-  <!-- jQuery -->
+  </body>
+  	<!-- jQuery -->
 	<script src="{% static 'js/jquery.min.js' %}"></script>
 	<!-- jQuery Easing -->
 	<script src="{% static 'js/jquery.easing.1.3.js' %}"></script>
@@ -250,5 +247,5 @@
     });
 	</script>
 	{%block endscript%}{%endblock%}
-  </body>
+  
 </html>

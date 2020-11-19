@@ -8,7 +8,7 @@ import requests
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 # importing my models
-from .models import notices
+from .models import notice
 
 # Create your views here.
 
@@ -21,7 +21,7 @@ def home(request):
 
 
 def notices_view(request):
-    notice_list = notices.objects.all()
+    notice_list = notice.objects.all()
     # print(notice_list)
     page = request.GET.get("page", 1)
     paginator = Paginator(notice_list, 10)

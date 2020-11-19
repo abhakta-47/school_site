@@ -1,0 +1,29 @@
+{%extends 'dash-base.html'%}
+
+{%block content%}
+    <h1>{{student_id}}</h1>
+    <!-- <h1>{{student_due.student.name}}</h1> -->
+    <form action="" method="POST">
+        {%csrf_token%}
+        <label for="month">Select monts to collect fees</label>
+        {%for item, value in student_due.items%}
+        {%if value == 'false' %}
+        <div class="form-check">
+        <input name="{{item}}" class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+        <label class="form-check-label" for="defaultCheck1">
+        {{item}}
+        </label>
+        </div>
+        {%endif%}
+        {%endfor%}
+        <button type="submit">sub</button>
+    </form>
+
+    <p>{{item}} {{ value }}</p>
+{%endblock%}
+<script>
+//var due = JSON.parse( '{{ student_due | escapejs}}' )
+//console.log(due)
+</script>
+        
+ 

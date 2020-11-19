@@ -1,0 +1,36 @@
+student :  
+    name, father, mother, dob, gender, 
+    roll, class, sec,
+    address : house,city, address1, address2, state, pin
+    contact : phone
+
+fees :  Tuition fee for
+        Tiffin Charges
+        Conveyance Charges
+        Computer Charges
+        Others
+        Session charge
+        Admission fee
+        Advance Deposite
+        Examination fees
+
+        Library fee
+        Saraswati Puja
+        Cultural fee
+        Game fee
+        Electric fee
+        Badge
+        Medical
+        Infrastructure Dev. fee
+        Others
+
+/// idea ///
+
+price list :
+    fee type 1  : once in a year
+    fee type 2  : once in a month
+            2.1 : value different for different class
+            2.2 : value same for different class
+
+due :
+    student, month, fee(bool)

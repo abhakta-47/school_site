@@ -23,7 +23,8 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include("home.urls")),
     # path("payment/", include("razor_pay.urls")),
-    path("feepay/", include("payment.urls")),
+    path("pay/", include("payment.urls")),
+    path("students/", include("students.urls")),
 ]
 
 urlpatterns = urlpatterns + static(
