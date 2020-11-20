@@ -78,23 +78,35 @@ def due_view(request, student_id):
         )
     )
 
-    amount_payable = grand_total - payment_info["deposit"]
+    if grand_total >= payment_info["deposit"]:
+        amount_payable = grand_total - payment_info["deposit"]
+        new_deposit = 0
+    else:
+        new_deposit = payment_info["deposit"] - grand_total
+        amount_payable = 0
+
+    # amount_payable = (
+    #     grand_total - payment_info["deposit"]
+    #     if grand_total >= payment_info["deposit"]
+    #     else 0
+    # )
 
     due_info = {
-        "id": student_id,
         "due": payment_info["due"],
-        "paid": payment_info["paid"].items(),
+        "paid": payment_info["paid"],
         "due_session": payment_info["due_session"],
         "deposit": payment_info["deposit"],
         "month_total": prices["month_total"],
-        "number_due_months": len(payment_info["due"]),
+        "number_due_months": len(payment_info["due"])
+        if payment_info["due_session"]
+        else (len(payment_info["due"]) - 1),
         "month_items": prices["month_items"],
         "session_total": prices["session_total"],
         "session_items": prices["session_items"],
         "grand_total": grand_total,
         "amount_payable": amount_payable,
+        "new_deposit": new_deposit,
     }
-    # print(due_info)
 
     return render(request, "dash-student-due.html", context=due_info)
 
