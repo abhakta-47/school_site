@@ -109,6 +109,10 @@ class price(models.Model):
             "session_items": session_items.items(),
         }
 
+    # def update_info(self, months, trx_no):
+    #     for month in months:
+    #         self[month] = trx_no
+
     def __str__(self):
         return self.stu_class + " " + self.session
 

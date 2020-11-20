@@ -94,20 +94,7 @@ def due_view(request, student_id):
         "grand_total": grand_total,
         "amount_payable": amount_payable,
     }
-    print(due_info)
-
-    if request.method == "POST":
-        data = request.POST
-        print(data["amount"])
-        transaction_instance = payment_models.transaction.objects.create(
-            student_id=student_id,
-            billed_amount=grand_total,
-            collected_amount=int(data["amount"]),
-            trxn_no="xxxxxxxx",
-            details=due_info.__str__(),
-        )
-        print(transaction_instance)
-        return HttpResponse("hhh")
+    # print(due_info)
 
     return render(request, "dash-student-due.html", context=due_info)
 

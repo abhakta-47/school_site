@@ -1,9 +1,9 @@
 from django.contrib import admin
 from django.utils.html import format_html
 from django.urls import reverse, path
-import json
+import json, datetime
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 # register your models here.
 
@@ -71,7 +71,9 @@ class studentAdmin(admin.ModelAdmin):
 
     def account_actions(self, obj):
         return format_html(
-            '<a class="button" href="">Collect Fee</a>'
+            '<a href="'
+            + str(obj.id)
+            + '/collect" class="btn btn-primary">Collect Fee</a>'
             # reverse("admin:account-deposit", args=[obj.pk]),
             # reverse("admin:account-withdraw", args=[obj.pk]),
         )
@@ -88,37 +90,7 @@ class studentAdmin(admin.ModelAdmin):
         return my_urls + urls
 
 
-def collect_view(request, student_id):
-
-    # # return render(request, "admin-due.html")
-    # context = {}
-    # student_inst = student.objects.get(pk=student_id)
-    # due_inst = student_inst.due_set.all()[0]
-
-    # payment_info = due_inst.payment_info()
-
-    # prices = payment_models.price.objects.filter(stu_class=student_inst.stu_class)
-    # prices = prices[0].formed_data()
-
-    # context = {
-    #     "paid": payment_info["paid"],
-    #     "due": payment_info["due"],
-    #     "prices": prices["month_items"],
-    #     "total": prices["month_total"],
-    #     "grand_total": prices["month_total"] * len(payment_info["due"]),
-    # }
-    # if request.method == "POST":
-    #     post_data = request.POST
-    #     print(post_data)
-    #     new_deposit = (
-    #         due_inst.deposit
-    #         + int(post_data["amount"])
-    #         - total * len(payment_info["due"])
-    #     )
-    #     return HttpResponse(new_deposit)
-
-    # return render(request, "admin-due.html", context)
-
+def get_due_info(student_id):
     student_instance = student.objects.get(id=student_id)
     due_instance = student_instance.due_set.all()[0]
     payment_info = due_instance.payment_info()
@@ -135,7 +107,18 @@ def collect_view(request, student_id):
         )
     )
 
-    amount_payable = grand_total - payment_info["deposit"]
+    if grand_total >= payment_info["deposit"]:
+        amount_payable = grand_total - payment_info["deposit"]
+        new_deposit = 0
+    else:
+        new_deposit = payment_info["deposit"] - grand_total
+        amount_payable = 0
+
+    # amount_payable = (
+    #     grand_total - payment_info["deposit"]
+    #     if grand_total >= payment_info["deposit"]
+    #     else 0
+    # )
 
     due_info = {
         "due": payment_info["due"],
@@ -149,21 +132,39 @@ def collect_view(request, student_id):
         "session_items": prices["session_items"],
         "grand_total": grand_total,
         "amount_payable": amount_payable,
+        "new_deposit": new_deposit,
     }
-    print(due_info)
+    # print(due_info)
+    return due_info
+
+
+def collect_view(request, student_id):
+
+    due_info = get_due_info(student_id)
 
     if request.method == "POST":
         data = request.POST
-        print(data["amount"])
+        trx_no = str(datetime.datetime.now())
         transaction_instance = payment_models.transaction.objects.create(
             student_id=student_id,
-            billed_amount=grand_total,
+            billed_amount=due_info["amount_payable"],
             collected_amount=int(data["amount"]),
-            trxn_no="xxxxxxxx",
+            trxn_no=trx_no,
             details=due_info.__str__(),
         )
-        print(transaction_instance)
-        return HttpResponse("hhh")
+        student_instance = student.objects.get(id=student_id)
+        due_instance = student_instance.due_set.all()[0]
+        for month in due_info["due"]:
+            setattr(due_instance, month, trx_no)
+        new_deposit = (
+            due_info["new_deposit"] + int(data["amount"]) - due_info["amount_payable"]
+        )
+        setattr(due_instance, "deposit", new_deposit)
+        due_instance.save()
+
+        return redirect(
+            "/admin/payment/transaction/" + str(transaction_instance.id) + "/change/"
+        )
 
     return render(request, "admin-due.html", context=due_info)
 
