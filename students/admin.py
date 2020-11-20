@@ -146,7 +146,7 @@ def collect_view(request, student_id):
 
     if request.method == "POST":
         data = request.POST
-        trx_no = str(datetime.datetime.now())
+        trx_no = str(datetime.datetime.now())[0:15]
         new_deposit = (
             due_info["new_deposit"] + int(data["amount"]) - due_info["amount_payable"]
         )
@@ -157,13 +157,9 @@ def collect_view(request, student_id):
             trxn_no=trx_no,
             details={
                 "due": due_info["due"],
-                "month_items": due_info["month_items"],
-                "session_items": due_info["session_items"],
-                "grand_total": due_info["grand_total"],
-                "deposit": due_info["deposit"],
                 "amount_payable": due_info["amount_payable"],
                 "collected_amount": int(data["amount"]),
-                "new_deposit": new_deposit,
+                # "due": "due"
             },
         )
         student_instance = student.objects.get(id=student_id)

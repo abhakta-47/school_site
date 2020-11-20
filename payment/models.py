@@ -125,7 +125,7 @@ class transaction(models.Model):
     student = models.ForeignKey("students.student", on_delete=models.CASCADE)
     billed_amount = models.IntegerField(verbose_name="billed amount")
     collected_amount = models.IntegerField(verbose_name="amount collected")
-    trxn_no = models.CharField(max_length=10)
+    trxn_no = models.CharField(max_length=20)
     details = models.JSONField(default=detail_default)
     mode = models.CharField(max_length=20, default="offline")
 

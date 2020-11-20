@@ -29,7 +29,7 @@ class transactionAdmin(admin.ModelAdmin):
         "trxn_no",
         "date_time",
         "mode",
-        # "details",
+        "details",
     ]
     formfield_overrides = {models.JSONField: {"widget": JSONEditorWidget}}
 
