@@ -92,21 +92,21 @@ class price(models.Model):
         prices.pop("session")
         month_total = 0
         session_total = 0
-        month_items = {}
-        session_items = {}
+        month_items = []
+        session_items = []
         for field, value in prices.items():
             if field in ["tuition_fee", "tiffin_charges", "electric_fee"]:
                 month_total = month_total + int(value)
-                month_items[field] = value
+                month_items.append({"type": field, "fee": value})
             else:
                 session_total = session_total + int(value)
-                session_items[field] = value
+                session_items.append({"type": field, "fee": value})
 
         return {
             "month_total": month_total,
-            "month_items": month_items.items(),
+            "month_items": month_items,
             "session_total": session_total,
-            "session_items": session_items.items(),
+            "session_items": session_items,
         }
 
     # def update_info(self, months, trx_no):
@@ -118,12 +118,15 @@ class price(models.Model):
 
 
 class transaction(models.Model):
+    def detail_default():
+        return '{"default":"default"}'
+
     date_time = models.DateTimeField(auto_now=True)
     student = models.ForeignKey("students.student", on_delete=models.CASCADE)
     billed_amount = models.IntegerField(verbose_name="billed amount")
     collected_amount = models.IntegerField(verbose_name="amount collected")
     trxn_no = models.CharField(max_length=10)
-    details = models.TextField()
+    details = models.JSONField(default=detail_default)
     mode = models.CharField(max_length=20, default="offline")
 
     def __str__(self):

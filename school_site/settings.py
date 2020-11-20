@@ -13,7 +13,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 from pathlib import Path
 import os
 
-import django_heroku
+# import django_heroku
 
 # import dj_database_url
 
@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     # installed
     "rest_framework",
     "rest_framework_datatables",
+    "django_json_widget",
     # custom
     "home",
     "admission",
@@ -219,7 +220,6 @@ WSGI_APPLICATION = "school_site.wsgi.application"
 
 DATABASES = {
     # "default": {"ENGINE": "django.db.backends.sqlite3", "NAME": BASE_DIR / "db.sqlite3"}
-    # # "default": dj_database_url.config(conn_max_age=600, ssl_require=True)
     "default": {
         "ENGINE": "django.db.backends.postgresql",
         "NAME": "d5118pmh879qd8",
@@ -275,4 +275,4 @@ MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 # Activate Django-Heroku.
-django_heroku.settings(locals())
+# django_heroku.settings(locals())

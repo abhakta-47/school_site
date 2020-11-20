@@ -141,7 +141,7 @@ class due(models.Model):
         else:
             due_session = False
 
-        paid_months = {}
+        paid_months = []
         due_months = []
 
         for field, value in due.items():
@@ -150,7 +150,7 @@ class due(models.Model):
 
                 month_counter = month_counter + 1
                 if value != "due":
-                    paid_months[field] = value
+                    paid_months.append({"month": field, "trx": value})
                     k = k + 1
                 else:
                     due_months.append(field)

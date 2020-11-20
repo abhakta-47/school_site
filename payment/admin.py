@@ -1,12 +1,5 @@
 from django.contrib import admin
-
-# Register your models here.
-
-# from .models import  order
-
-# admin.site.register(due_list)
-# admin.site.register(order)
-# # admin.site.Register()
+from django_json_widget.widgets import JSONEditorWidget
 
 from .models import *
 
@@ -36,8 +29,9 @@ class transactionAdmin(admin.ModelAdmin):
         "trxn_no",
         "date_time",
         "mode",
-        "details",
+        # "details",
     ]
+    formfield_overrides = {models.JSONField: {"widget": JSONEditorWidget}}
 
 
 class priceAdmin(admin.ModelAdmin):

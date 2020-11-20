@@ -122,11 +122,13 @@ def get_due_info(student_id):
 
     due_info = {
         "due": payment_info["due"],
-        "paid": payment_info["paid"].items(),
+        "paid": payment_info["paid"],
         "due_session": payment_info["due_session"],
         "deposit": payment_info["deposit"],
         "month_total": prices["month_total"],
-        "number_due_months": len(payment_info["due"]),
+        "number_due_months": len(payment_info["due"])
+        if payment_info["due_session"]
+        else (len(payment_info["due"]) - 1),
         "month_items": prices["month_items"],
         "session_total": prices["session_total"],
         "session_items": prices["session_items"],
@@ -145,20 +147,30 @@ def collect_view(request, student_id):
     if request.method == "POST":
         data = request.POST
         trx_no = str(datetime.datetime.now())
+        new_deposit = (
+            due_info["new_deposit"] + int(data["amount"]) - due_info["amount_payable"]
+        )
         transaction_instance = payment_models.transaction.objects.create(
             student_id=student_id,
             billed_amount=due_info["amount_payable"],
             collected_amount=int(data["amount"]),
             trxn_no=trx_no,
-            details=due_info.__str__(),
+            details={
+                "due": due_info["due"],
+                "month_items": due_info["month_items"],
+                "session_items": due_info["session_items"],
+                "grand_total": due_info["grand_total"],
+                "deposit": due_info["deposit"],
+                "amount_payable": due_info["amount_payable"],
+                "collected_amount": int(data["amount"]),
+                "new_deposit": new_deposit,
+            },
         )
         student_instance = student.objects.get(id=student_id)
         due_instance = student_instance.due_set.all()[0]
         for month in due_info["due"]:
             setattr(due_instance, month, trx_no)
-        new_deposit = (
-            due_info["new_deposit"] + int(data["amount"]) - due_info["amount_payable"]
-        )
+
         setattr(due_instance, "deposit", new_deposit)
         due_instance.save()
 
