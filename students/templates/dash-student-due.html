@@ -16,10 +16,10 @@
                                     <th>Charge</th>
                                 </tr>
                             </thead>
-                            {% for type,charge in session_items %}
+                            {% for item in session_items %}
                                 <tr>
-                                    <td>{{type}}</td>
-                                    <td>{{charge}}</td>
+                                    <td>{{item.type}}</td>
+                                    <td>{{item.fee}}</td>
                                 </tr>
                             {% endfor %}
                             <tfoot>
@@ -49,11 +49,11 @@
                                 <th>Total Charge</th>
                             </tr>
                         </thead>
-                        {% for item,value in month_items %}
+                        {% for item in month_items %}
                         <tr>
-                            <td>{{item}}</td>
-                            <td>{{value}}</td>
-                            <td>{% widthratio value 1 number_due_months%}</td>
+                            <td>{{item.type}}</td>
+                            <td>{{item.fee}}</td>
+                            <td>{% widthratio item.fee 1 number_due_months%}</td>
                         </tr>
                         {% endfor %}
                         <tfoot>
@@ -133,10 +133,10 @@
                                 <th>Transction No.</th>
                             </tr>
                         </thead>
-                        {% for month,trx in paid %}
+                        {% for items in paid %}
                             <tr>
-                                <td>{{month}}</td>
-                                <td>{{trx}}</td>
+                                <td>{{item.month}}</td>
+                                <td>{{item.trx}}</td>
                             </tr>
                         {% endfor %}
                     </table>
