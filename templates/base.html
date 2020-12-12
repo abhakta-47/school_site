@@ -109,12 +109,12 @@
 							<li {%if '/admission' in request.path  %}  class="active" {%endif%}><a href="/admission">Admission</a></li>
 							<li {%if '/pay' in request.path %}  class="active" {%endif%}><a href="/pay">Payment</a></li>
 							<li {%if '/notices' in request.path  %}  class="active" {%endif%}><a href="/notices">Notices</a></li>
-							<!-- <li><a href="courses.html">Courses</a></li>
-							<li><a href="teacher.html">Teacher</a></li>
-							<li><a href="about.html">About</a></li>
-							<li><a href="pricing.html">Pricing</a></li>
+							<li {%if '/courses' in request.path  %}  class="active" {%endif%}><a href="/courses">Courses</a></li>
+							<li {%if '/teacher' in request.path  %}  class="active" {%endif%}><a href="/teacher">Teacher</a></li>
+							<li {%if '/about' in request.path  %}  class="active" {%endif%}><a href="/about">About</a></li>
+							<li {%if '/pricing' in request.path  %}  class="active" {%endif%}><a href="/pricing">Pricing</a></li>
 							<li class="has-dropdown">
-								<a href="blog.html">Blog</a>
+								<a href="/blog">Blog</a>
 								<ul class="dropdown">
 									<li><a href="#">Web Design</a></li>
 									<li><a href="#">eCommerce</a></li>
@@ -122,8 +122,8 @@
 									<li><a href="#">API</a></li>
 								</ul>
 							</li>
-							<li><a href="contact.html">Contact</a></li>
-							<li class="btn-cta"><a href="#"><span>Login</span></a></li>
+							<li><a href="/contact">Contact</a></li>
+							<!-- <li class="btn-cta"><a href="#"><span>Login</span></a></li>
 							<li class="btn-cta"><a href="#"><span>Create a Course</span></a></li> -->
 						</ul>
 					</div>
