@@ -1,149 +1,148 @@
-{%extends 'base.html'%}
-
-{%block content%}
-<<div class="col-12">
-    
-    {%if due_session%}
-    <div class="row py-3">    
-            <div class="col-md-8">
-                <div class="card" >
-                    <div class="card-body">
-                        <h4 class="header">Sessional Charges</h4>
-                        <table class="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th>Type</th>
-                                    <th>Charge</th>
-                                </tr>
-                            </thead>
-                            {% for item in session_items %}
-                                <tr>
-                                    <td>{{item.type}}</td>
-                                    <td>{{item.fee}}</td>
-                                </tr>
-                            {% endfor %}
-                            <tfoot>
-                                <tr>
-                                    <td>Session Total</td>
-                                    <td>{{session_total}}</td>
-                                </tr>
-                            </tfoot>
-                        </table>
-                    </div>
-                </div>
-            </div>
-    </div>
-    {%endif%}
-    
-    <div class="row py-3">
-     
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="heading">Monthly Charges</h4>
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th>Type</th>
-                                <th>Charge/month</th>
-                                <th>Total Charge</th>
-                            </tr>
-                        </thead>
-                        {% for item in month_items %}
-                        <tr>
-                            <td>{{item.type}}</td>
-                            <td>{{item.fee}}</td>
-                            <td>{% widthratio item.fee 1 number_due_months%}</td>
-                        </tr>
-                        {% endfor %}
-                        <tfoot>
-                            <tr>
-                                <td>Month Total</td>
-                                <td>{{month_total}}</td>
-                                <td>{% widthratio month_total 1 number_due_months%}</td>
-                            </tr>
-                        </tfoot>
-                    </table>
-                </div>
-            </div>
+{%extends 'base.html'%} {%block content%}
+<div class="col-12">
+  {%if due_session%}
+  <div class="row py-3">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="header">Sessional Charges</h4>
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>Type</th>
+                <th>Charge</th>
+              </tr>
+            </thead>
+            {% for item in session_items %}
+            <tr>
+              <td>{{item.type}}</td>
+              <td>{{item.fee}}</td>
+            </tr>
+            {% endfor %}
+            <tfoot>
+              <tr>
+                <td>Session Total</td>
+                <td>{{session_total}}</td>
+              </tr>
+            </tfoot>
+          </table>
         </div>
-        
-        <div class="col-md-4">
-            <div class="card" >
-                <div class="card-body">
-                    <h4 class="header">Due Months : {{number_due_months}}</h4>
-                    <ol>
-                        {% for month in due %}
-                            <li>{{month}}</li>
-                        {% endfor %}
-                    </ol>
-                </div>
-            </div>
+      </div>
+    </div>
+  </div>
+  {%endif%}
+
+  <div class="row py-3">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="heading">Monthly Charges</h4>
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>Type</th>
+                <th>Charge/month</th>
+                <th>Total Charge</th>
+              </tr>
+            </thead>
+            {% for item in month_items %}
+            <tr>
+              <td>{{item.type}}</td>
+              <td>{{item.fee}}</td>
+              <td>{% widthratio item.fee 1 number_due_months%}</td>
+            </tr>
+            {% endfor %}
+            <tfoot>
+              <tr>
+                <td>Month Total</td>
+                <td>{{month_total}}</td>
+                <td>{% widthratio month_total 1 number_due_months%}</td>
+              </tr>
+            </tfoot>
+          </table>
         </div>
+      </div>
     </div>
 
-    <div class="row py-3">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-body">
-                    <h3 class="heading ">Total</h3>
-                    <div class="card-text">
-                    <table class="table table-hover">
-                        <tr>
-                            <td>Grand Total (session+monthly)</td>
-                            <td>{{grand_total}}</td>
-                        </tr>
-                        <tr>
-                            <td>Deposit</td>
-                            <td>{{deposit}}</td>
-                        </tr>
-                        <tr>
-                            <td>Final Ammount Payable</td>
-                            <td>{{amount_payable}}</td>
-                        </tr>
-                    </table>
-                    </div>
-                </div>
-            </div>
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="header">Due Months : {{number_due_months}}</h4>
+          <ol>
+            {% for month in due %}
+            <li>{{month}}</li>
+            {% endfor %}
+          </ol>
         </div>
+      </div>
     </div>
+  </div>
 
-    <div class="row py-3">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-body">
-                    <div class="row" style="align-items: center !important;">
-                        <h5 class="text-center" style="margin: 0  10px !important;">Continue to pay Rs.{{amount_payable}}</h5>
-                        <a href="{% url 'collect_fee' id %}" class="btn btn-primary">Continue</a>
-                    </div>
-                </div>
-            </div>
-        </div>     
+  <div class="row py-3">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-body">
+          <h3 class="heading">Total</h3>
+          <div class="card-text">
+            <table class="table table-hover">
+              <tr>
+                <td>Grand Total (session+monthly)</td>
+                <td>{{grand_total}}</td>
+              </tr>
+              <tr>
+                <td>Deposit</td>
+                <td>{{deposit}}</td>
+              </tr>
+              <tr>
+                <td>Final Ammount Payable</td>
+                <td>{{amount_payable}}</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 
-    <div class="row py-3">
-        <div class="col-md-8">
-            <div class="card" >
-                <div class="card-body">
-                    <h4 class="header">Paid Months</h4>
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th>Month</th>
-                                <th>Transction No.</th>
-                            </tr>
-                        </thead>
-                        {% for items in paid %}
-                            <tr>
-                                <td>{{item.month}}</td>
-                                <td>{{item.trx}}</td>
-                            </tr>
-                        {% endfor %}
-                    </table>
-                </div>
-            </div>
-        </div>  
+  <div class="row py-3">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-body">
+          <div class="row" style="align-items: center !important">
+            <h5 class="text-center" style="margin: 0 10px !important">
+              Continue to pay Rs.{{amount_payable}}
+            </h5>
+            <a href="{% url 'collect_fee' id %}" class="btn btn-primary"
+              >Continue</a
+            >
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 
+  <div class="row py-3">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="header">Paid Months</h4>
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>Month</th>
+                <th>Transction No.</th>
+              </tr>
+            </thead>
+            {% for items in paid %}
+            <tr>
+              <td>{{item.month}}</td>
+              <td>{{item.trx}}</td>
+            </tr>
+            {% endfor %}
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 {%endblock%}

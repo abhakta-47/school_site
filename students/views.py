@@ -92,6 +92,7 @@ def due_view(request, student_id):
     # )
 
     due_info = {
+        "id":student_id,
         "due": payment_info["due"],
         "paid": payment_info["paid"],
         "due_session": payment_info["due_session"],
@@ -107,7 +108,11 @@ def due_view(request, student_id):
         "amount_payable": amount_payable,
         "new_deposit": new_deposit,
     }
+    # print("."*50)
+    # print(due_info)
+    # print("."*50)
 
+    # return HttpResponse(due_info)
     return render(request, "dash-student-due.html", context=due_info)
 
 
